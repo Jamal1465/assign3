@@ -1,5 +1,6 @@
 ## TradeX Stock Portfolio Simulator
 
+
 TradeX is a **React + FastAPI + PostgreSQL** single-page web application for simulating stock trading.  
 Users can register, log in, trade virtual stocks with dynamic prices, and track their portfolio value, cash, and total profit/loss with visual analytics.
 
