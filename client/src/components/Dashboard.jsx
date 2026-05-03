@@ -37,13 +37,13 @@ function Dashboard() {
   const fetchAllData = async () => {
     try {
       const [summaryRes, portfolioRes, riskRes, historyRes, allocRes, sectorsRes, marketRes] = await Promise.all([
-        axios.get(`http://54.209.78.237:8000/portfolio/${userId}/summary`),
-        axios.get(`http://54.209.78.237:8000/portfolio/${userId}`),
-        axios.get(`http://54.209.78.237:8000/portfolio/${userId}/risk-metrics`),
-        axios.get(`http://54.209.78.237:8000/trades/${userId}/history?limit=5`),
-        axios.get(`http://54.209.78.237:8000/portfolio/${userId}/allocation`),
-        axios.get(`http://54.209.78.237:8000/portfolio/${userId}/sectors`),
-        axios.get(`http://54.209.78.237:8000/market/prices`)
+        axios.get(`http://3.222.182.127:8000/portfolio/${userId}/summary`),
+        axios.get(`http://3.222.182.127:8000/portfolio/${userId}`),
+        axios.get(`http://3.222.182.127:8000/portfolio/${userId}/risk-metrics`),
+        axios.get(`http://3.222.182.127:8000/trades/${userId}/history?limit=5`),
+        axios.get(`http://3.222.182.127:8000/portfolio/${userId}/allocation`),
+        axios.get(`http://3.222.182.127:8000/portfolio/${userId}/sectors`),
+        axios.get(`http://3.222.182.127:8000/market/prices`)
       ]);
 
       setSummary(summaryRes.data);
