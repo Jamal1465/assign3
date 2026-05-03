@@ -1,10 +1,11 @@
-version: '3'
+version: "3.8"
 
 services:
+
   db:
     image: postgres:15
-    container_name: db_container
-    restart: always
+    container_name: tradex_db
+
     environment:
       POSTGRES_USER: tradex_user
       POSTGRES_PASSWORD: tradex_pass
@@ -13,34 +14,26 @@ services:
       - tradex_db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - tradex-network-part1
 
   backend:
     build: ./backend
-    container_name: backend_container
+    container_name: tradex_backend
     depends_on:
       - db
     environment:
       DATABASE_URL: postgresql://tradex_user:tradex_pass@db:5432/tradex_db
     ports:
       - "8000:8000"
-    networks:
-      - tradex-network-part1
 
   client:
     build: ./client
-    container_name: client_container
+    container_name: tradex_client
     depends_on:
       - backend
     ports:
       - "3000:3000"
-    networks:
-      - tradex-network-part1
+    environment:
+      REACT_APP_API_URL: http://3.222.182.127:8000
 
 volumes:
   tradex_db_data:
-
-networks:
-  tradex-network-part1:         # ✅ Separate network for Part 1
-    driver: bridge
