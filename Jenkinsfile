@@ -10,24 +10,15 @@ pipeline {
     }
 
     triggers {
-        githubPush()  // ✅ Webhook application repo mein hoga
+        githubPush()
     }
 
     stages {
 
-        stage('Checkout Application Code') {
+        stage('Checkout') {
             steps {
-                echo 'Cloning TradeX application code...'
-                // Application ka code already checkout ho chuka hai
-                // Jenkins automatically checkout karega because webhook application repo par hai
-                sh 'echo "Application code checked out from TradeX repo"'
-            }
-        }
-
-        stage('Checkout Test Code') {
-            steps {
-                echo 'Cloning test repository from GitHub...'
-                dir("${TEST_DIR}") {
+                echo 'Cloning TradeX test repository...'
+                dir(TEST_DIR) {
                     git url: "${TEST_REPO}", branch: 'main'
                 }
             }
@@ -36,7 +27,7 @@ pipeline {
         stage('Build Test Image') {
             steps {
                 echo 'Building Docker image with Chrome + Selenium...'
-                dir("${TEST_DIR}") {
+                dir(TEST_DIR) {
                     sh "docker build -t ${TEST_IMAGE} ."
                 }
             }
@@ -46,7 +37,7 @@ pipeline {
             steps {
                 echo 'Bringing TradeX application up...'
                 sh """
-                    cd ${WORKSPACE}
+                    cd ~/Assign2/TradeX
                     docker compose up -d
                     sleep 10
                 """
@@ -56,7 +47,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running 15 Selenium test cases in headless Chrome...'
-                dir("${TEST_DIR}") {
+                dir(TEST_DIR) {
                     sh """
                         mkdir -p \$(pwd)/reports
                         chmod 777 \$(pwd)/reports
@@ -88,12 +79,12 @@ pipeline {
     post {
         always {
             script {
-                // 1. Get committer email from APPLICATION repo (not test repo)
+
+                // 1. Get committer email
                 def committerEmail = "admin@example.com"
                 try {
-                    // Yeh ab application repo se email lega (kyunki trigger wahan se hai)
                     committerEmail = sh(
-                        script: "git log -1 --pretty=format:'%ae'",
+                        script: "cd ${TEST_DIR} && git log -1 --pretty=format:'%ae'",
                         returnStdout: true
                     ).trim()
                     echo "Sending results to: ${committerEmail}"
