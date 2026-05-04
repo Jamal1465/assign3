@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Bringing TradeX application up...'
                 sh """
-                    cd ~/Assign2/TradeX
+                    cd /var/lib/jenkins/tradex-tests
                     docker compose up -d
                     sleep 10
                 """
