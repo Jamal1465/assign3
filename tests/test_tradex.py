@@ -28,8 +28,8 @@ from selenium.webdriver.chrome.service import Service
 BASE_URL = "http://3.222.182.127:3000"
 
 # A pre-existing test account (must exist in the DB before the suite runs)
-VALID_EMAIL    = "testuser@test.com"
-VALID_PASSWORD = "test123456"
+VALID_EMAIL    = "test@example.com"
+VALID_PASSWORD = "testpass123"
 
 # A fresh account created once per test run
 UNIQUE_SUFFIX   = uuid.uuid4().hex[:6]
@@ -137,7 +137,7 @@ class TestAuthentication:
             login_as_valid_user(driver, wait)
 
         logout_btn = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//button[contains(text(),'Logout') or contains(text(),'Sign Out')]")
+            (By.XPATH, "//button[contains(text(),'Log Out') or contains(text(),'Sign Out')]")
         ))
         logout_btn.click()
         wait.until(EC.url_contains("/login"))
