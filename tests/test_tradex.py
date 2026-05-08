@@ -19,7 +19,7 @@ from selenium.webdriver.chrome.options import Options
 # ──────────────────────────────────────────────────────
 # CONFIG
 # ──────────────────────────────────────────────────────
-BASE_URL = os.getenv("BASE_URL", "http://3.222.182.127:3000")
+BASE_URL = os.getenv("BASE_URL", "http://3.108.169.181:3000")
 VALID_EMAIL = "testuser@test.com"
 VALID_PASSWORD = "test123456"
 WAIT_TIMEOUT = 20
