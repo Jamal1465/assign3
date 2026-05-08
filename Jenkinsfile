@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         TEST_IMAGE = "tradex-selenium-tests:${BUILD_NUMBER}"
-        TEST_REPO  = "https://github.com/Bilalaaskari2003/tradex-tests.git"
+        TEST_REPO  = "https://github.com/Jamal1465/assign3.git"
         TEST_DIR   = "tradex-tests"
-        APP_URL    = "http://3.222.182.127:3000"
-        API_URL    = "http://3.222.182.127:8000"
+        APP_URL    = "http://3.108.169.181:3000"
+        API_URL    = "http://3.108.169.181:8001"
     }
 
     triggers {
